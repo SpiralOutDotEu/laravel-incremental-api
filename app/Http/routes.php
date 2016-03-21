@@ -27,5 +27,8 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::group(['prefix' => 'api/v1'], function(){
+        Route::resource('lessons', 'LessonsController');
+    });
+
 });
