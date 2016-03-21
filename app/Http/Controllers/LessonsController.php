@@ -6,6 +6,8 @@ use App\Lesson;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Response;
+
 
 class LessonsController extends Controller
 {
@@ -16,7 +18,10 @@ class LessonsController extends Controller
      */
     public function index()
     {
-        return Lesson::all(); // Really bad practice
+        $lessons = Lesson::all(); // Really bad practice
+        return Response::json([
+            'data' =>$lessons->toArray()
+        ],200);
     }
 
     /**
