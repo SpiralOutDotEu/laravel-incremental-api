@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lesson;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -15,7 +16,7 @@ class LessonsController extends Controller
      */
     public function index()
     {
-        //
+        return Lesson::all(); // Really bad practice
     }
 
     /**
