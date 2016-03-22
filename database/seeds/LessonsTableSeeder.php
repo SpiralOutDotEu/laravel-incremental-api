@@ -20,10 +20,15 @@ class LessonsTableSeeder extends Seeder
         $faker = Faker::create();
         foreach(range(1,30)as $index)
         {
-           DB::table('lessons')->insert([
-                'title' => $faker->sentence(5),
-                'body' => $faker->paragraph(4)
-            ]);
+//           DB::table('lessons')->insert([
+//                'title' => $faker->sentence(5),
+//                'body' => $faker->paragraph(4)
+//            ]);
+            $lesson = new Lesson;
+            $lesson->title = $faker->sentence(5);
+            $lesson->body = $faker->paragraph(4);
+            $lesson->some_bool = $faker->boolean();
+            $lesson->save();
         }
 
     }
