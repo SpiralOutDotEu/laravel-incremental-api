@@ -20,7 +20,7 @@ class LessonsController extends Controller
     {
         $lessons = Lesson::all(); // Really bad practice
         return Response::json([
-            'data' =>$lessons->toArray()
+            'data' =>$this->transform($lessons)
         ],200);
     }
 
@@ -99,5 +99,17 @@ class LessonsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function transform($lessons)
+    {
+        return array_map(function($lesson)
+        {
+            return [
+                'title' => $lesson['title'],
+                'body' => $lesson['body'],
+                'active' => $lesson['some_bool']
+            ];
+        }, $lessons->toArray());
     }
 }
