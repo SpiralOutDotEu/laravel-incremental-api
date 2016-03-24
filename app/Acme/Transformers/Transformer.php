@@ -1,4 +1,4 @@
-<?php namespace Acme\Transformers;
+<?php namespace App\Acme\Transformers;
 
 /**
  * Created by PhpStorm.

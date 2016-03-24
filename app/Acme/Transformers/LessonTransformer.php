@@ -6,7 +6,7 @@
  * Time: 7:52 πμ
  */
 
-namespace Acme\Transformers;
+namespace App\Acme\Transformers;
 
 
 class LessonTransformer extends Transformer
