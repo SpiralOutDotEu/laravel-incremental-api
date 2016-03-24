@@ -101,10 +101,7 @@ class LessonsController extends Controller
         //
     }
 
-    private function transformCollection($lessons)
-    {
-        return array_map([$this, 'transform'], $lessons->toArray());
-    }
+
 
     private function transform($lesson)
     {
