@@ -102,13 +102,4 @@ class LessonsController extends Controller
     }
 
 
-
-    private function transform($lesson)
-    {
-            return [
-                'title' => $lesson['title'],
-                'body' => $lesson['body'],
-                'active' => (boolean) $lesson['some_bool']
-            ];
-    }
 }
