@@ -22,6 +22,7 @@ class LessonsController extends ApiController
     public function __construct(LessonTransformer $lessonTransformer)
     {
         $this->lessonTransformer = $lessonTransformer;
+
     }
 
     /**
@@ -55,7 +56,7 @@ class LessonsController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        dd('store');
     }
 
     /**
@@ -75,6 +76,7 @@ class LessonsController extends ApiController
             'data' => $this->lessonTransformer->transform($lesson)
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
