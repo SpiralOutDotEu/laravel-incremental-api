@@ -7,6 +7,7 @@ use App\Lesson;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
 
@@ -56,7 +57,11 @@ class LessonsController extends ApiController
      */
     public function store(Request $request)
     {
-        dd('store');
+        if (!Input::get('title') or !Input::get('body')) {
+            return $this->respondParametersFailed('Title or Body missing');
+        }
+        Lesson::create($request->all());
+        return $this->respondCreated('Lesson successfully created.');
     }
 
     /**
