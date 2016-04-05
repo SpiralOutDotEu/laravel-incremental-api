@@ -16,9 +16,9 @@ class UsersTableSeeder extends Seeder
         User::truncate();
 
         User::create([
-            'email' => 'user@user.com',
-            'password' => Hash::make('password'),
-            'name' => 'user',
+            'email' => 'master@master.com',
+            'password' => Hash::make('master'),
+            'name' => 'master',
         ]);
     }
 }
