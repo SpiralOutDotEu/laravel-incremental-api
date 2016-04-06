@@ -23,6 +23,39 @@ class ApiController extends Controller
     protected $statusCode = 200;
 
     /**
+     * @param string $message
+     * @return mixed
+     */
+    public function respondNotFound($message = 'Not Found')
+    {
+        return $this->setStatusCode(404)->respondWithError('Lesson not found.');
+    }
+
+    /**
+     * @param $message
+     * @return mixed
+     */
+    public function respondWithError($message)
+    {
+        return $this->respond([
+            'error' => [
+                'message' => $message,
+                'status_code' => $this->getStatusCode()
+            ]
+        ]);
+    }
+
+    /**
+     * @param $data
+     * @param array $headers
+     * @return mixed
+     */
+    public function respond($data, $headers = [])
+    {
+        return Response::json($data, $this->getStatusCode(), $headers);
+    }
+
+    /**
      * @return mixed
      */
     public function getStatusCode()
@@ -40,36 +73,22 @@ class ApiController extends Controller
     }
 
     /**
-     * @param string $message
      * @return mixed
      */
-    public function respondNotFound($message = 'Not Found')
+    public function respondCreated($message)
     {
-        return $this->setStatusCode(404)->respondWithError('Lesson not found.');
-    }
-
-    /**
-     * @param $data
-     * @param array $headers
-     * @return mixed
-     */
-    public function respond($data, $headers = [])
-    {
-        return Response::json($data, $this->getStatusCode(), $headers);
-    }
-
-    /**
-     * @param $message
-     * @return mixed
-     */
-    public function respondWithError($message)
-    {
-        return $this->respond([
-            'error' => [
-                'message' => $message,
-                'status_code' => $this->getStatusCode()
-            ]
+        return $this->setStatusCode(201)->respond([
+            'message' => $message
         ]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function respondParametersFailed($message)
+    {
+        return $this->setStatusCode(422)
+            ->respondWithError($message);
     }
 
 }
