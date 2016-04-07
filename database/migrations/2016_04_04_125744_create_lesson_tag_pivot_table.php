@@ -12,7 +12,7 @@ class CreateLessonTagPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('lessons_tag', function (Blueprint $table) {
+        Schema::create('lesson_tag', function (Blueprint $table) {
             $table->integer('lesson_id')->unsigned()->index();
             $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
             $table->integer('tag_id')->unsigned()->index();
@@ -28,6 +28,6 @@ class CreateLessonTagPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('lessons_tag');
+        Schema::drop('lesson_tag');
     }
 }

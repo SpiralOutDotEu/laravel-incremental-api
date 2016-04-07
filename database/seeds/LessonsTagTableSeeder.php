@@ -23,8 +23,8 @@ class LessonsTagTableSeeder extends Seeder
         $lessonIds = DB::table('lessons')->pluck('id');
         $tagIds = DB::table('tags')->pluck('id');
 
-        foreach (range(1, 10) as $index) {
-            DB::table('lessons_tag')->insert([
+        foreach (range(1, 30) as $index) {
+            DB::table('lesson_tag')->insert([
                 'lesson_id' => $faker->randomElement($lessonIds),
                 'tag_id' => $faker->randomElement($tagIds),
             ]);
