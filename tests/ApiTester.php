@@ -38,6 +38,21 @@ class ApiTester extends TestCase
     }
 
     /**
+     * @param $lesson
+     */
+    public function assertObjectHasAttributes()
+    {
+        $args = func_get_args();
+        $object = array_shift($args);
+
+        foreach ($args as $attribute) {
+            $this->assertObjectHasAttribute($attribute, $object);
+        }
+
+
+    }
+
+    /**
      * @param $count
      */
     protected function times($count)
