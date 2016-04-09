@@ -34,7 +34,7 @@ class ApiTester extends TestCase
         // but you can call
         // $this->app['artisan']->call('migrate');
         // or
-        // Artisan::call('migrate');
+        Artisan::call('migrate');
     }
 
     /**
