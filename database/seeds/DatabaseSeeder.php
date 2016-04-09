@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     private $tables = [
         'lessons',
         'tags',
-        'lessons_tag'
+        'lesson_tag'
 
     ];
     /**
