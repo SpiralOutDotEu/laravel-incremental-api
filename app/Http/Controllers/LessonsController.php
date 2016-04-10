@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\URL;
 
 
 class LessonsController extends ApiController
@@ -33,9 +34,29 @@ class LessonsController extends ApiController
      */
     public function index()
     {
-        $lessons = Lesson::all(); // Really bad practice
+        $limit = Input::get('limit') ?: 3;
+        $limit = ($limit <= 20) ? $limit : 20;
+        $lessons = Lesson::orderBy('title', 'asc');
+        /*  i can just do this:
+         *    return $lessons-paginate($limit);
+         *  but it will not be transformed
+        */
+        $lessons = $lessons->paginate($limit);
+        $lessons->setPath(URL::to('/') . '/api/v1/lessons/?limit=' . $limit);
+        //$lessons = Lesson::all(); // Really bad practice
+
         return $this->respond([
-            'data' =>$this->lessonTransformer->transformCollection($lessons->all())
+            'data' => $this->lessonTransformer->transformCollection($lessons->all()),
+            'paginator' => [
+                'total_count' => $lessons->total(),
+                'total_pages' => $lessons->lastPage(),
+                'previous_page' => $lessons->previousPageUrl(),
+                'current_page' => $lessons->currentPage(),
+                'next_page' => $lessons->nextPageUrl(),
+                'limit' => $lessons->perPage(),
+                'links' => $lessons->links(),
+            ],
+
         ]);
     }
 
@@ -72,7 +93,7 @@ class LessonsController extends ApiController
      */
     public function show($id)
     {
-       $lesson = Lesson::find($id);
+        $lesson = Lesson::find($id);
         if ( ! $lesson)
         {
             return $this->respondNotFound('Lesson does not exist.');
