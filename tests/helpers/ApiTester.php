@@ -2,6 +2,8 @@
 
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Artisan;
+use App\Lesson;
+use App\Tag;
 
 /**
  * Created by PhpStorm.
@@ -9,10 +11,10 @@ use Illuminate\Support\Facades\Artisan;
  * Date: 8/4/2016
  * Time: 3:52 μμ
  */
-class ApiTester extends TestCase
+abstract class ApiTester extends TestCase
 {
     protected $fake;
-    protected $times = 1;
+
 
     /**
      * ApiTester constructor.
@@ -37,6 +39,7 @@ class ApiTester extends TestCase
         Artisan::call('migrate');
     }
 
+
     /**
      * @param $lesson
      */
@@ -52,18 +55,9 @@ class ApiTester extends TestCase
 
     }
 
-    /**
-     * @param $count
-     */
-    protected function times($count)
+    protected function getJson($uri, $method = 'GET', $parameteres = [])
     {
-        $this->times = $count;
-        return $this;
-    }
-
-    protected function getJson($uri)
-    {
-        return json_decode($this->call('GET', $uri)->getContent());
+        return json_decode($this->call($method, $uri, $parameteres)->getContent());
     }
 
 
